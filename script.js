@@ -28,14 +28,15 @@ $(function init() {
   svBtnEl.on('click', svHandler);
 
   for(let i=0; i<=24; i++){
-    var currentHour = $('#hour-' + [i])
+    var currentHourEl = $('#hour-' + [i])
+    var currentHour = +now.format('H');
   
-  if(now.format('H') < [i]){
-  currentHour.children('.description').addClass('past')}
-  else if(now.format('H')  === [i]){
-    currentHour.children('.description').addClass('present')}
-    else if(now.format('H')  > [i]){
-    currentHour.children('.description').addClass('future')
+  if(currentHour > [i]){
+  currentHourEl.children('.description').addClass('past')}
+  else if(currentHour == [i]){
+    currentHourEl.children('.description').addClass('present')}
+    else if(currentHour  < [i]){
+    currentHourEl.children('.description').addClass('future')
    }
   }
 
