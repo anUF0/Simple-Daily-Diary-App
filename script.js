@@ -20,10 +20,15 @@ $(function() {
   function svHandler(event) {
     var selectedTextArea= $(event.target).parent('.time-block').children('.description');
     var selectedHour = $(event.target).parent('.time-block').children('.hour');
-    localStorage.setItem(selectedHour.text(),selectedTextArea.val() );
+
+
+    localStorage.setItem(selectedHour.text(), selectedTextArea.val().trim());
   };  
 
-  svBtnEl.on('click', svHandler)
+  console.log(localStorage.getItem('9AM'));
+  
+
+  svBtnEl.on('click', svHandler);
 
 
 
@@ -35,14 +40,13 @@ $(function() {
   if(hourEl.id){
     timeblockEl.addClass('future');
   }
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  if(){
-    
-  }
 
+  for (let i = 9; i<=12; i++){
+$('#hour-' + [i]).children('.description').text(localStorage.getItem([i] + 'AM'))
+}
+for (let i = 1 ;i <=5; i++){
+  $('#hour-' + [i]).children('.description').text(localStorage.getItem([i] + 'PM'))
+  }
 
   var today = dayjs();
   $('#currentDay').text(today.format('MMM D, YYYY'));
