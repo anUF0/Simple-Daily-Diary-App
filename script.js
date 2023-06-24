@@ -2,12 +2,12 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 //TODO Call of the the IDs
-  const containerEl = $('.container');
-  const svBtnEl =$('.saveBtn');
-  const descriptionEl = $('.description')
 
-  console.log(containerEl)
-  console.log(svBtnEl);
+  //TODO: Change to Sv Icon
+  const svBtnEl =$('.saveBtn');
+  const descriptionEl =$('.texteara');
+  const timeblockEl =$('.time-block');
+  const hourEl =$('.hour');
 
 
 $(function() {
@@ -20,13 +20,7 @@ $(function() {
   function svHandler(event) {
     var selectedTextArea= $(event.target).parent('.time-block').children('.description');
     var selectedHour = $(event.target).parent('.time-block').children('.hour');
-
-    console.log(selectedTextArea.text());
-    
-    console.log(selectedHour.text());
-
-    
-
+    localStorage.setItem(selectedHour.text(),selectedTextArea.val() );
   };  
 
   svBtnEl.on('click', svHandler)
@@ -38,12 +32,18 @@ $(function() {
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
-  //
+  if(hourEl.id){
+    timeblockEl.addClass('future');
+  }
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
-  
+  if(){
+    
+  }
+
+
   var today = dayjs();
   $('#currentDay').text(today.format('MMM D, YYYY'));
 });
