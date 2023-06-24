@@ -5,12 +5,12 @@
 
   //TODO: Change to Sv Icon
   const svBtnEl =$('.saveBtn');
-  const descriptionEl =$('.texteara');
   const timeblockEl =$('.time-block');
   const hourEl =$('.hour');
+  var now = dayjs();
 
 
-$(function() {
+$(function init() {
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -24,32 +24,34 @@ $(function() {
 
     localStorage.setItem(selectedHour.text(), selectedTextArea.val().trim());
   };  
-
-  console.log(localStorage.getItem('9AM'));
   
-
   svBtnEl.on('click', svHandler);
 
-
-
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  if(hourEl.id){
-    timeblockEl.addClass('future');
+  for(let i=0; i<=24; i++){
+    var currentHour = $('#hour-' + [i])
+  
+  if(now.format('H') < [i]){
+  currentHour.children('.description').addClass('past')}
+  else if(now.format('H')  === [i]){
+    currentHour.children('.description').addClass('present')}
+    else if(now.format('H')  > [i]){
+    currentHour.children('.description').addClass('future')
+   }
   }
 
-  for (let i = 9; i<=12; i++){
-$('#hour-' + [i]).children('.description').text(localStorage.getItem([i] + 'AM'))
+//Series of For statments 
+for (let i = 0; i<=11; i++){
+$('#hour-' + [i]).children('.description').text(localStorage.getItem([i] + 'AM'));
 }
-for (let i = 1 ;i <=5; i++){
-  $('#hour-' + [i]).children('.description').text(localStorage.getItem([i] + 'PM'))
-  }
+//Syntax required '12PM' get its own slot
+$('#hour-12').children('.description').text(localStorage.getItem('12PM'));
 
-  var today = dayjs();
-  $('#currentDay').text(today.format('MMM D, YYYY'));
+for (let i = 13 ;i <=24; i++){
+  $('#hour-' + [i]).children('.description').text(localStorage.getItem([i-12] + 'PM'));
+}
+  
+//Current Day Display
+  $('#currentDay').text(now.format('MMM D, YYYY h:mmA'));
 });
 
 
