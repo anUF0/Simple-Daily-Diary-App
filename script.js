@@ -3,18 +3,34 @@
 // in the html.
 //TODO Call of the the IDs
   const containerEl = $('.container');
+  const svBtnEl =$('.saveBtn');
+  const descriptionEl = $('.description')
 
   console.log(containerEl)
+  console.log(svBtnEl);
 
 
-$(function init() {
+$(function() {
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
   // function? How can DOM traversal be used to get the "hour-x" id of the
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
-  
+  function svHandler(event) {
+    var selectedTextArea= $(event.target).parent('.time-block').children('.description');
+    var selectedHour = $(event.target).parent('.time-block').children('.hour');
+
+    console.log(selectedTextArea.text());
+    
+    console.log(selectedHour.text());
+
+    
+
+  };  
+
+  svBtnEl.on('click', svHandler)
+
 
 
   // TODO: Add code to apply the past, present, or future class to each time
@@ -27,7 +43,6 @@ $(function init() {
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
-  // TODO: Add code to display the current date in the header of the page.
   
   var today = dayjs();
   $('#currentDay').text(today.format('MMM D, YYYY'));
@@ -35,4 +50,4 @@ $(function init() {
 
 
 //Initialise
-init()
+//init()
