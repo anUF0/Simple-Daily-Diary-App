@@ -1,36 +1,31 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
-//TODO Call of the the IDs
 
-  //TODO: Change to Sv Icon
   const svBtnEl =$('.saveBtn');
-  const timeblockEl =$('.time-block');
-  const hourEl =$('.hour');
+  const svIconEl =$('.fa-save');
   var now = dayjs();
 
 
 $(function init() {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
+
+  //Save Button Handler
   function svHandler(event) {
-    var selectedTextArea= $(event.target).parent('.time-block').children('.description');
-    var selectedHour = $(event.target).parent('.time-block').children('.hour');
 
+    console.log(event.target)
 
+    var selectedTextArea= $(event.target).parents('.time-block').children('.description');
+    var selectedHour = $(event.target).parents('.time-block').children('.hour');
+    console.log(selectedTextArea.val());
     localStorage.setItem(selectedHour.text(), selectedTextArea.val().trim());
   };  
   
+  //Runs the above function upon click
   svBtnEl.on('click', svHandler);
 
+
+  //Runs through the different ids, comparing them against the current hour
   for(let i=0; i<=24; i++){
-    var currentHourEl = $('#hour-' + [i])
     var currentHour = +now.format('H');
-  
+    var currentHourEl =  $('#hour-' + [i]);
+
   if(currentHour > [i]){
   currentHourEl.children('.description').addClass('past')}
   else if(currentHour == [i]){
@@ -40,7 +35,7 @@ $(function init() {
    }
   }
 
-//Series of For statments 
+//Series of For statments that cycle through the local storge. AM and PM had to be separate
 for (let i = 0; i<=11; i++){
 $('#hour-' + [i]).children('.description').text(localStorage.getItem([i] + 'AM'));
 }
@@ -50,11 +45,8 @@ $('#hour-12').children('.description').text(localStorage.getItem('12PM'));
 for (let i = 13 ;i <=24; i++){
   $('#hour-' + [i]).children('.description').text(localStorage.getItem([i-12] + 'PM'));
 }
-  
+
 //Current Day Display
-  $('#currentDay').text(now.format('MMM D, YYYY h:mmA'));
-});
-
-
-//Initialise
-//init()
+$('#currentDay').text(now.format('MMM D, YYYY'));
+}
+);
