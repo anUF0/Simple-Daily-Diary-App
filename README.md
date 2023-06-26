@@ -10,4 +10,4 @@ Different colours are used to indicate the current hour, with old events being g
 https://anuf0.github.io/Simple-Daily-Diary-App/
 
 ## Screenshot
-Link[.\screenshot.mp4]
+![.\screenshot.mp4]
