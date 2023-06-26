@@ -1,6 +1,5 @@
 
   const svBtnEl =$('.saveBtn');
-  const svIconEl =$('.fa-save');
   var now = dayjs();
 
 
